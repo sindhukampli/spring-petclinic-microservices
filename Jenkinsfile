@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git 'https://github.com/sindhukampli/spring-petclinic-microservices.git'
+                git branch: 'main', url: 'https://github.com/sindhukampli/spring-petclinic-microservices.git'
             }
         }
 
@@ -36,7 +36,6 @@ pipeline {
         stage('Deploy with Helm') {
             steps {
                 script {
-                    
                     sh "helm upgrade --install petclinic ${HELM_CHART_PATH} --values ${HELM_CHART_PATH}/values.yaml"
                 }
             }
