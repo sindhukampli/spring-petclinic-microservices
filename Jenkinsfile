@@ -20,7 +20,8 @@ pipeline {
         stage('Build and Push Docker Images') {
             steps {
                 script {
-                    withCredentials([aws(credentialsId: "${AWS_CREDENTIALS_ID}", region: "${AWS_REGION}")]) {
+                    // Check for credentials and login
+                    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: "${AWS_CREDENTIALS_ID}", region: "${AWS_REGION}"]]) {
                         // AWS ECR login
                         sh 'aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_REGISTRY}'
 
@@ -39,6 +40,7 @@ pipeline {
         stage('Deploy with Helm') {
             steps {
                 script {
+                    // Ensure Helm is installed and properly configured
                     sh "helm upgrade --install petclinic ${HELM_CHART_PATH} --values ${HELM_CHART_PATH}/values.yaml"
                 }
             }
