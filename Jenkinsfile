@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                     // Check for credentials and login
-                    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: "${AWS_CREDENTIALS_ID}", region: "${AWS_REGION}"]]) {
+                    withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: ' terraform_user ', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')])  {
                         // AWS ECR login
                         sh 'aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_REGISTRY}'
 
