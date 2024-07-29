@@ -20,8 +20,7 @@ pipeline {
         stage('Build and Push Docker Images') {
             steps {
                 script {
-                    // Check for credentials and login
-                    withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: ' terraform_user ', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')])  {
+                    withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: "${AWS_CREDENTIALS_ID}", secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                         // AWS ECR login
                         sh 'aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_REGISTRY}'
 
