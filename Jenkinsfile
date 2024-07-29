@@ -7,7 +7,7 @@ pipeline {
         HELM_CHART_PATH = "helm-charts/petclinic"
         IMAGE_NAME1 = "petclinic-service1"
         IMAGE_NAME2 = "petclinic-service2"
-        AWS_CREDENTIALS_ID = "terraform_user"  
+        AWS_CREDENTIALS_ID = "eks1"  
     }
 
     stages {
