@@ -25,8 +25,8 @@ pipeline {
                         sh 'aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_REGISTRY}'
 
                         // Build Docker images
-                        sh 'docker build -t ${ECR_REGISTRY}/${IMAGE_NAME1}:latest -f docker/Dockerfile-service1 .'
-                        sh 'docker build -t ${ECR_REGISTRY}/${IMAGE_NAME2}:latest -f docker/Dockerfile-service2 .'
+                        sh 'docker build -t ${ECR_REGISTRY}/${IMAGE_NAME1}:latest -f docker/Dockerfile .'
+                        sh 'docker build -t ${ECR_REGISTRY}/${IMAGE_NAME2}:latest -f docker/Dockerfile .'
 
                         // Push Docker images to ECR
                         sh 'docker push ${ECR_REGISTRY}/${IMAGE_NAME1}:latest'
