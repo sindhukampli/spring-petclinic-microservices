@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: petclinic-ingress
+spec:
+  rules:
+  - host: example.com
+    http:
+      paths:
+      - path: /service1
+        pathType: Prefix
+        backend:
+          service:
+            name: petclinic-service1
+            port:
+              number: {{ .Values.service1.service.port }}
+      - path: /service2
+        pathType: Prefix
+        backend:
+          service:
+            name: petclinic-service2
+            port:
+              number: {{ .Values.service2.service.port }}

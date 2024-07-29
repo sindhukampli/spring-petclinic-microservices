@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: petclinic-service1
+spec:
+  replicas: {{ .Values.service1.replicaCount }}
+  selector:
+    matchLabels:
+      app: petclinic-service1
+  template:
+    metadata:
+      labels:
+        app: petclinic-service1
+    spec:
+      containers:
+      - name: petclinic-service1
+        image: {{ .Values.service1.image.repository }}:{{ .Values.service1.image.tag }}
+        ports:
+        - containerPort: {{ .Values.service1.service.port }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: petclinic-service2
+spec:
+  replicas: {{ .Values.service2.replicaCount }}
+  selector:
+    matchLabels:
+      app: petclinic-service2
+  template:
+    metadata:
+      labels:
+        app: petclinic-service2
+    spec:
+      containers:
+      - name: petclinic-service2
+        image: {{ .Values.service2.image.repository }}:{{ .Values.service2.image.tag }}
+        ports:
+        - containerPort: {{ .Values.service2.service.port }}

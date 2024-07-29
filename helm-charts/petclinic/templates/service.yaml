@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: petclinic-service1
+spec:
+  ports:
+  - port: {{ .Values.service1.service.port }}
+    targetPort: {{ .Values.service1.service.targetPort }}
+  selector:
+    app: petclinic-service1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: petclinic-service2
+spec:
+  ports:
+  - port: {{ .Values.service2.service.port }}
+    targetPort: {{ .Values.service2.service.targetPort }}
+  selector:
+    app: petclinic-service2

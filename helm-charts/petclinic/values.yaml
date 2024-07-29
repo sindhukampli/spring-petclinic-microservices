@@ -1,0 +1,17 @@
+service1:
+  replicaCount: 2
+  image:
+    repository: "<your-account-id>.dkr.ecr.<your-region>.amazonaws.com/petclinic-service1"
+    tag: "latest"
+  service:
+    port: 8080
+    targetPort: 8080
+
+service2:
+  replicaCount: 2
+  image:
+    repository: "<your-account-id>.dkr.ecr.<your-region>.amazonaws.com/petclinic-service2"
+    tag: "latest"
+  service:
+    port: 8081
+    targetPort: 8081
